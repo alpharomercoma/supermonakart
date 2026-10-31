@@ -1,13 +1,40 @@
+<div align="center">
+
+<img src="docs/readme/logo.png" width="128" alt="">
+
 # Super Mona Kart
+
+**Kart racing on the GitHub Universe 2026 badge.**<br>
+Nine mascots, four tracks, drifting, items and Wi-Fi party races, in MicroPython on the badge itself.
+
+[![GitHub Universe 2026 badge](https://img.shields.io/badge/GitHub%20Universe-2026%20badge-14183C?style=flat-square)](#2-install-on-a-badge)
+[![MicroPython](https://img.shields.io/badge/runs%20on-MicroPython-14183C?style=flat-square)](#6-setup)
+[![Party](https://img.shields.io/badge/party-2%20to%204%20badges-14183C?style=flat-square)](#4-party-races-on-real-badges)
+[![License](https://img.shields.io/badge/license-MIT-14183C?style=flat-square)](LICENSE)
+
+<img src="docs/readme/race.gif" width="640" alt="A race montage at 320x240, shown at 2x: the countdown and the pack leaving the line on Octocat Meadow, Tux taking the lead with a bee alongside on Frost Fork, a pile-up in Merge Conflict Canyon, and Ferris ending up in the lava on Deploy Volcano.">
+
+<sub>Recorded in the badge simulator at the badge's 320x240 resolution, shown at 2x.</sub>
+
+</div>
 
 The badge mascots' Grand Prix: a Mode 7 kart racer for the GitHub Universe
 2026 badge. Mona (Flappy), Cluck (Plucky Cluck), Sciuri (Snarky Sciuridae),
 Buzz (Bee Amazed) and Tux race from the start; Ferris, the Go gopher, Duke and
-the Android robot unlock as you play. Four tracks (grass, deep sand, ice,
-lava), drifting with a mini-turbo, five items, a Grand Prix with a podium, a
-time trial against your ghost, and party races between badges over Wi-Fi.
+the Android robot unlock as you play. Drift through a corner for a
+mini-turbo, throw a Rubber Duck at the kart ahead, drop a Bug behind you, and
+if you are last, a Force Push spins everyone in front. Win the Grand Prix for a trophy,
+chase your own ghost in Time Trial, or race the badges around you over Wi-Fi.
 The case lights count down the start, glow with your drift charge and flash
 when you boost or get hit.
+
+<div align="center">
+
+[![Four screens: the title over a computer race on Deploy Volcano, the racer picker on Ferris, Mona leading with drift sparks beside a shielded Android robot, and Mona on the Octo Cup podium.](docs/readme/screens.png)](docs/readme/screens.png)
+
+<sub>The title screen, the racer picker, a drift with a mini-turbo charging, and the Octo Cup podium.</sub>
+
+</div>
 
 Built by Team 2 at the GitHub Universe 2026 Campus Experts hackathon
 ([campus-experts/ce-badge-universe26-hack-OFFICIAL](https://github.com/campus-experts/ce-badge-universe26-hack-OFFICIAL)).
@@ -15,19 +42,78 @@ Why it is built this way, and every review finding: [`DESIGN.md`](DESIGN.md).
 
 ## Contents
 
-1. [Install on a badge](#1-install-on-a-badge)
-2. [Controls](#2-controls)
-3. [Party races on real badges](#3-party-races-on-real-badges)
-4. [Develop: quick start](#4-develop-quick-start)
-5. [Setup](#5-setup)
-6. [Reproduce every check](#6-reproduce-every-check)
-7. [Rerun one thing](#7-rerun-one-thing)
-8. [Change the art or a track](#8-change-the-art-or-a-track)
-9. [Troubleshooting](#9-troubleshooting)
-10. [Project layout](#10-project-layout)
-11. [Racers and credits](#11-racers-and-credits)
+1. [A lap around the game](#1-a-lap-around-the-game)
+2. [Install on a badge](#2-install-on-a-badge)
+3. [Controls](#3-controls)
+4. [Party races on real badges](#4-party-races-on-real-badges)
+5. [Develop: quick start](#5-develop-quick-start)
+6. [Setup](#6-setup)
+7. [Reproduce every check](#7-reproduce-every-check)
+8. [Rerun one thing](#8-rerun-one-thing)
+9. [Change the art or a track](#9-change-the-art-or-a-track)
+10. [Troubleshooting](#10-troubleshooting)
+11. [Project layout](#11-project-layout)
+12. [Racers and credits](#12-racers-and-credits)
 
-## 1. Install on a badge
+## 1. A lap around the game
+
+### Nine racers
+
+<div align="center">
+
+<img src="docs/readme/racers.gif" width="640" alt="The racer picker stepping through all nine racers, each kart turning on the spot beside its stats: Mona, Cluck, Sciuri, Buzz, Tux, Ferris, the Go gopher, Duke and the Android robot.">
+
+</div>
+
+Every racer has 12 stat points spread across speed, acceleration, handling and
+weight, or 11 and a trait: Tux grips on ice and the Go gopher digs through
+grass. Five start unlocked; the rest are earned (section 12).
+
+### Four tracks
+
+<div align="center">
+
+[![Four races: Mona in a pack on Octocat Meadow with a Rubber Duck in hand, a bunch of karts and Tux in Merge Conflict Canyon, Tux leading on Frost Fork with a bee on his wheel, and a pack racing between the lava fields of Deploy Volcano.](docs/readme/tracks.png)](docs/readme/tracks.png)
+
+<sub>Octocat Meadow, Merge Conflict Canyon, Frost Fork and Deploy Volcano.</sub>
+
+</div>
+
+Grass, deep sand, ice and lava, each with its own grip, boost pads and item
+boxes. Leave the road on Deploy Volcano and you drop into the lava, back on
+the track 1.3 seconds later.
+
+Hold drift through a corner: the sparks go blue, then orange, then pink, and
+letting go fires a mini-turbo that grows with the charge. Item boxes give
+better items the further back you are:
+
+| Item | What it does |
+| --- | --- |
+| Commit Boost | A burst of speed |
+| Bug | Dropped behind you; whoever drives into it spins out |
+| Rubber Duck | Thrown ahead; it steers toward the next kart |
+| Copilot Shield | Absorbs one hit |
+| Force Push | Last place only: every kart ahead spins |
+
+### Ways to play
+
+<div align="center">
+
+[![Four screens: the final Grand Prix standings, a Time Trial result saying the new record's ghost is saved, Tux racing that ghost, and two badges in a Party lobby.](docs/readme/modes.png)](docs/readme/modes.png)
+
+<sub>Grand Prix standings, a Time Trial record, racing your own ghost, and a Party lobby with two badges connected.</sub>
+
+</div>
+
+- **Grand Prix:** four races, points for every finish (10, 7, 5, 3), and a
+  trophy on the podium. Win on Normal to unlock Hard.
+- **Quick Race:** one track against three rivals.
+- **Time Trial:** no items, three boosts, and your best run comes back as a
+  ghost to beat.
+- **Party:** two to four badges on the same Wi-Fi race each other; computer
+  karts fill the empty slots (section 4).
+
+## 2. Install on a badge
 
 You need a GitHub Universe 2026 badge, a USB-C cable that carries data, and
 this repository (`git clone https://github.com/alpharomercoma/supermonakart`,
@@ -65,7 +151,7 @@ a race (if it is low, Settings > Fast graphics); that Left, Right and Select
 are the bottom-row switches; drifting with BACK and with Up; the case lights
 during the countdown; Settings > Tilt steering.
 
-## 2. Controls
+## 3. Controls
 
 On the badge, every action works from the touch face and from the physical
 switches:
@@ -86,7 +172,7 @@ labels (SEL, BK, MN) and show the switch alternative after a slash.
 In the simulator window the four corners glow with the case lights, and P
 saves a screenshot.
 
-## 3. Party races on real badges
+## 4. Party races on real badges
 
 1. On every badge, set `WIFI_SSID` and `WIFI_PASSWORD` in `secrets.py` (USB
    disk mode, root of the drive). Never commit it.
@@ -101,7 +187,7 @@ saves a screenshot.
 A badge that goes quiet for four seconds is out of the race (DNF). Over USB
 serial, `party: race ...` is printed when a race starts.
 
-## 4. Develop: quick start
+## 5. Develop: quick start
 
 From the repository root, on macOS with Xcode's command line tools, CMake and
 Python 3:
@@ -115,7 +201,7 @@ python3 badgesim.py super_mona_kart --play          # play with the keyboard
 Without the simulator you can still run the logic tests (`./run_checks.sh`
 skips the steps that need it).
 
-## 5. Setup
+## 6. Setup
 
 ### What you need
 
@@ -164,7 +250,7 @@ What the simulator emulates, and what it does not:
   `@micropython.native`/`viper` (the game uses neither), screen inversion.
   Frame rate must be judged on a badge.
 
-## 6. Reproduce every check
+## 7. Reproduce every check
 
 ```sh
 ./run_checks.sh                 # about 40 s; logs and screenshots in /tmp/smk-checks
@@ -185,7 +271,7 @@ Each step prints PASS, FAIL or SKIP, and the script exits 1 on any failure.
 Screenshots of every scripted run land in the output directory, one folder per
 step.
 
-## 7. Rerun one thing
+## 8. Rerun one thing
 
 ```sh
 # logic tests, verbose, or one class
@@ -214,7 +300,7 @@ run that presses HOME reports a failure even when the app quit cleanly.
 `--realtime` runs headless on the wall clock, which two badges talking to each
 other need.
 
-## 8. Change the art or a track
+## 9. Change the art or a track
 
 Art and tracks are generated, not hand-edited:
 
@@ -233,7 +319,18 @@ python3 -m unittest test_super_mona_kart.py
 - Commit the regenerated files with the change; step 3 of `run_checks.sh`
   fails if they drift.
 
-## 9. Troubleshooting
+The pictures in this README come from the simulator too. `capture.py` plays
+seeded races, so every run gives the same frames:
+
+```sh
+python3 docs/readme/make_media.py             # about 20 s; rewrites docs/readme/*.png and *.gif
+python3 docs/readme/make_media.py --keep /tmp/smk-frames   # also keep every captured frame
+```
+
+If a change alters the races, look at the kept frames and update the moments
+listed at the top of `make_media.py`.
+
+## 10. Troubleshooting
 
 | Symptom | Fix |
 | --- | --- |
@@ -242,13 +339,13 @@ python3 -m unittest test_super_mona_kart.py
 | Build fails with `<cstdlib> tried including <stdlib.h>` | The patch did not apply; rerun the setup into a fresh directory |
 | The window shows nothing or closes at once | Run the same command without `--play` for the traceback, or read the printed `FATAL:` lines |
 | A party test hangs, or a simulated badge sees nobody | An old simulator may still hold the port: `pkill -f build-pv3`, then rerun |
-| No `BADGER` drive appears | Use a data cable, double-press RESET again, or use the `mpremote` command in section 1 |
+| No `BADGER` drive appears | Use a data cable, double-press RESET again, or use the `mpremote` command in section 2 |
 | Super Mona Kart is not in the menu | Check the folder is `apps/super_mona_kart` with `__init__.py` inside, then press RESET |
 | Party says "No Wi-Fi details" on a badge | Set `WIFI_SSID`/`WIFI_PASSWORD` in the badge's `secrets.py` |
 | Party lobby shows only you on real badges | The network blocks peer traffic; use a phone hotspot |
-| The racer you want is a "?" | It is locked; see section 11, or Settings > Unlock all racers (demo) |
+| The racer you want is a "?" | It is locked; see section 12, or Settings > Unlock all racers (demo) |
 
-## 10. Project layout
+## 11. Project layout
 
 | Path | What it is |
 | --- | --- |
@@ -263,9 +360,10 @@ python3 -m unittest test_super_mona_kart.py
 | `setup_simulator.sh`, `badgesim.patch` | Builds the simulator from pinned upstream commits |
 | `run_checks.sh` | Reruns every check |
 | `make_assets.py` | Generates the art and tracks |
+| `docs/readme/` | This README's pictures, and `make_media.py` and `capture.py`, which record them in the simulator |
 | `DESIGN.md` | Design thinking, critique of the hackathon repository, emulation notes, review log |
 
-## 11. Racers and credits
+## 12. Racers and credits
 
 | Racer | From | Stats (spd/acc/hnd/wgt) | Unlock |
 | --- | --- | --- | --- |
