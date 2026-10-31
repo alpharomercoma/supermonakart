@@ -217,6 +217,12 @@ correctly on a reproduced crash. New findings, all fixed with tests:
 | 8 | Low | The Android robot's hint was cut off | Hints wrap |
 | 9 | Low | Restarting race one re-rolled the cup's rivals | Rivals are chosen when the cup starts |
 
+### Round 4: a crash quitting at the end, on a badge, 2026-10-31, 1 finding
+
+| # | Sev | Finding | Fix |
+| --- | --- | --- | --- |
+| 1 | High | Reported on a badge: the game crashed at the end when quitting. Leaving a race kept the finished race and its world (with a 256 KB track texture) alive while the next race or the menus' attract race was built, and the attract race outlived its replacement. A texture needs one 256 KB gap; after a few races the heap had none, and the simulator raised `MemoryError` at exactly those hand-overs once part of its heap was reserved to mimic a tighter badge | `Game.free_race()` drops the race, world and ghost before any new race and on every screen drawn over the attract race; the old attract race is dropped before its replacement. With part of the simulator's 7.5 MB heap reserved, a full cup and quit to the menu now survives with 1.35 MB free (it failed with 2.35 MB), and five minutes in the menus survives with 5.5 MB reserved (it failed after one or two rebuilds). Still to confirm on a badge |
+
 Two automated security reviews of the party code:
 
 - Malformed packets could raise and reset the badge. Fixed: every field is

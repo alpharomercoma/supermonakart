@@ -1,6 +1,7 @@
 # Screens and flow: title, menus, character and track select, races, results,
 # Grand Prix standings, podium, time trial and settings.
 
+import gc
 import math
 from rng import Rng
 from badgeware import State
@@ -21,6 +22,8 @@ MAX_SUBSTEP = 0.05      # physics never steps more than 50 ms at a time
 MAX_FRAME = 0.5         # a frame slower than this (a hitch) is treated as 500 ms
 
 TITLE, MENU, CHARS, DIFF, TRACKSEL, INTRO, RACE, PAUSE, RESULTS, STANDINGS, PODIUM, SETTINGS, PARTY, CREDITS_S = range(14)
+# Screens drawn over the attract race; none of them needs the last race.
+BACKDROP_STATES = (TITLE, MENU, CHARS, DIFF, TRACKSEL, SETTINGS, PARTY, CREDITS_S)
 
 MODES = (
     ("Grand Prix", "Four tracks, points, a trophy"),
@@ -88,9 +91,22 @@ class Game:
     # -- helpers -----------------------------------------------------------------
 
     def go(self, state, cursor=0):
+        if state in BACKDROP_STATES and self.race is not None:
+            self.free_race()
         self.state = state
         self.state_ms = self.now
         self.cursor = cursor
+
+    def free_race(self):
+        """Drop the last race, its world (with its 256 KB track texture) and
+        ghost. A texture must be allocated in one piece, and after a few races
+        the heap has no second 256 KB gap, so building the next race's world or
+        the menus' attract world while the old one is alive ran out of memory,
+        most often at the end of a cup."""
+        self.race = None
+        self.world = None
+        self.ghost = None
+        gc.collect()
 
     def since(self):
         return self.now - self.state_ms
@@ -149,6 +165,9 @@ class Game:
 
     def new_attract(self):
         """A computer-only race that plays behind the title and the menus."""
+        self.attract = None             # free the old one's texture first
+        self._attract_world = None
+        gc.collect()
         t = self.rng.randrange(len(TRACKS))
         cast = pick_rivals(-1, list(range(len(CHARACTERS))), self.rng, 4)
         self.attract = Race(TRACKS[t], [Entrant(i, CPU) for i in cast], difficulty=1,
@@ -371,8 +390,7 @@ class Game:
         spec = TRACKS[track]
         self.attract = None
         self._attract_world = None
-        import gc
-        gc.collect()
+        self.free_race()                # the next race, a restart or a new cup
         if self.mode == TRIAL:
             ents = [Entrant(self.char, HUMAN)]
             self.race = Race(spec, ents, items=False, start_boosts=3, seed=1, grid=[0], record_ghost=True)
